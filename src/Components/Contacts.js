@@ -28,7 +28,7 @@ class Contacts extends React.Component {
     render() {
         const { contacts } = this.state;
         return (
-            <div>
+            <React.Fragment>
                 { contacts.map((contact) => {
                    return (
                       <Contact 
@@ -37,7 +37,7 @@ class Contacts extends React.Component {
                         />
                    )}) 
                 }
-            </div>
+            </React.Fragment>
         );
     }
 }
