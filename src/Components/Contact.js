@@ -6,8 +6,12 @@ class Contact extends React.Component {
         showContactInfo: false
     };
 
-    onExpand = (e) => {
+    onExpandClick = (e) => {
         this.setState({ showContactInfo: !this.state.showContactInfo });
+    }
+
+    onDeleteClick = () => {
+        this.props.deleteClickHandler();
     }
 
     render() {
@@ -17,7 +21,19 @@ class Contact extends React.Component {
         return (
             <div className='card card-body mb-3'>
                 <h4>
-                    {name} <i onClick={this.onExpand} className='fas fa-sort-down' />
+                    {name} 
+                    <i
+                        style={{cursor: 'pointer'}}
+                        onClick={this.onExpandClick} 
+                        className='fas fa-sort-down' 
+                    />
+                    <i 
+                        className='fas fa-times' 
+                        style={{ cursor: 'pointer',
+                            float: 'right', 
+                            color: 'red' }} 
+                        onClick={this.onDeleteClick}
+                    />
                 </h4>
                 {showContactInfo ? (
                     <ul className='list-group'>
@@ -31,7 +47,8 @@ class Contact extends React.Component {
 }
 
 Contact.propTypes = {
-    contact: PropTypes.object.isRequired
+    contact: PropTypes.object.isRequired,
+    deleteClickHandler: PropTypes.func.isRequired
 }
 
 export default Contact;
