@@ -4,15 +4,6 @@ import Contact from './Contact';
 import { Consumer } from '../Context';
 
 class Contacts extends React.Component {
-    deleteContact = (id) => {
-        const { contacts } = this.state;
-
-        const newContacts = contacts.filter(contact => contact.id !== id);
-        this.setState({
-            contacts: newContacts
-        });
-    }
-
     render() {
         return (
             <Consumer>
@@ -25,7 +16,6 @@ class Contacts extends React.Component {
                                 <Contact 
                                     key={contact.id}
                                     contact={contact}
-                                    deleteClickHandler={this.deleteContact.bind(this, contact.id)}
                                     />
                             )}) 
                             }
