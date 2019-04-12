@@ -7,6 +7,15 @@ class AddContact extends React.Component {
         phone: ''
     }
 
+    onFieldChange = (e) => this.setState({
+        [e.target.name]: e.target.value
+    });
+
+    onFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state);
+    }
+
     render () {
         const { name, email, phone } = this.state;
         return (
@@ -15,7 +24,7 @@ class AddContact extends React.Component {
                     Add Contact
                 </div>
                 <div className='card-body'>
-                    <form>
+                    <form onSubmit={this.onFormSubmit}>
                         <div className='form-group'>
                             <label htmlFor='name'>Name</label>
                             <input 
@@ -24,6 +33,7 @@ class AddContact extends React.Component {
                                 className='form-control form-control-lg'
                                 placeholder='Enter Name...'
                                 value={name}
+                                onChange={this.onFieldChange}
                             />
                         </div>
                         <div className='form-group'>
@@ -34,6 +44,7 @@ class AddContact extends React.Component {
                                 className='form-control form-control-lg'
                                 placeholder='Enter Email...'
                                 value={email}
+                                onChange={this.onFieldChange}
                             />
                         </div>
                         <div className='form-group'>
@@ -44,6 +55,7 @@ class AddContact extends React.Component {
                                 className='form-control form-control-lg'
                                 placeholder='Enter phone...'
                                 value={phone}
+                                onChange={this.onFieldChange}
                             />
                         </div>
                         <input type='submit' 
