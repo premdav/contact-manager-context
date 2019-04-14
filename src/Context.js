@@ -23,30 +23,19 @@ const reducer = (state, action) => {
 
 export class Provider extends React.Component {
     state = {
-        contacts: [
-            {
-                id: 1,
-                name: 'John Doe',
-                email: 'jdoe@gmail.com',
-                phone: '555-555-5555'
-            },
-            {
-                id: 2,
-                name: 'Shawn Mendes',
-                email: 'smend@outlook.com',
-                phone: '444-444-4444'
-            },
-            {
-                id: 3,
-                name: 'Henry Travis',
-                email: 'henry@gmail.com',
-                phone: '333-333-3333'
-            }
-        ],
+        contacts: [],
         dispatch: action => {
             this.setState(state => reducer(state, action))
         }
     };
+
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data => this.setState({
+            contacts: data
+        }));
+    }
 
     render() {
         return (
