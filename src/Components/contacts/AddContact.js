@@ -1,7 +1,7 @@
 import React from 'react';
 import { Consumer } from '../../Context';
 import TextInputGroup from '../layout/TextInputGroup';
-import uuid from 'uuid';
+import axios from 'axios';
 
 class AddContact extends React.Component {
     state = {
@@ -15,7 +15,7 @@ class AddContact extends React.Component {
         [e.target.name]: e.target.value
     });
 
-    onFormSubmit = (dispatch, e) => {
+    onFormSubmit = async (dispatch, e) => {
         e.preventDefault();
         const { name, email, phone } = this.state;
         // Check for errors in form
@@ -33,13 +33,14 @@ class AddContact extends React.Component {
         }
 
         const newContact = {
-            id: uuid(),
             name,
             email,
             phone
         };
 
-        dispatch({ type: 'ADD_CONTACT', payload: newContact });
+        const res = await axios.post('https://jsonplaceholder.typicode.com/users', newContact);
+        dispatch({ type: 'ADD_CONTACT', payload: res.data });
+
         // Clear State on form submission - also clears inputs
         this.setState({
             name: '',
